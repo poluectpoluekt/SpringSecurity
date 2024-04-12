@@ -35,6 +35,11 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
             throw new UserAlreadyRegistered("This user already exists.");
         }else {
             Person person = personMapper.toPerson(personDto);
+            person.setPassword(bCryptPasswordEncoder.encode(personDto.getPassword()));
+            person.setAccountNonExpired(true);
+            person.setAccountNonLocked(true);
+            person.setCredentialsNonExpired(true);
+            person.setEnabled(true);
             personRepository.save(person);
         }
 

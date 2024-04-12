@@ -20,12 +20,14 @@ public class SpringSecurity {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(WHITE_LIST).permitAll()
                         .anyRequest().authenticated())
-                .build();
+                .logout(l -> l.logoutUrl("/login").clearAuthentication(true).invalidateHttpSession(true));
+
+         return http.build();
 
     }
 

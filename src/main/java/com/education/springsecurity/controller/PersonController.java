@@ -2,7 +2,9 @@ package com.education.springsecurity.controller;
 
 import com.education.springsecurity.dto.PersonDto;
 import com.education.springsecurity.service.PersonServiceImpl;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,18 +23,23 @@ public class PersonController {
 
     @GetMapping("/find")
     public PersonDto findPerson(){
+
+        //TODO
         return null;
     }
 
-    @PostMapping("/registration")
-    public void registration(@RequestBody PersonDto personDto){
+    @PostMapping("/signup")
+    public void registration(@Valid @RequestBody PersonDto personDto){
 
+        personService.create(personDto);
     }
 
     @DeleteMapping("delete")
     public void deletePerson(){
 
     }
+
+
 
 }
 
