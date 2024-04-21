@@ -24,7 +24,7 @@ CREATE TABLE public.person (
         password varchar(100) NOT NULL,
         is_account_non_expired boolean NOT NULL,
         is_account_non_locked boolean NOT NULL,
-        s_credentials_non_expired boolean NOT NULL,
+        is_credentials_non_expired boolean NOT NULL,
         is_enabled boolean NOT NULL
 );
 

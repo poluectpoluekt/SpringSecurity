@@ -1,8 +1,0 @@
-services:
-  db_pg_15:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: SpringSecure
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports: 5432

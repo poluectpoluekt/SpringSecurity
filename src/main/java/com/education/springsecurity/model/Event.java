@@ -17,14 +17,21 @@ import java.time.LocalDateTime;
 public class Event {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
+
+    @Column(name = "title")
     private String name;
+
+    @Column(name = "create_at")
     private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     private Person owner;
 
+    @Column(name = "description")
     private String description;
 
 }

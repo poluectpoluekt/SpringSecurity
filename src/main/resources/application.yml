@@ -1,21 +1,11 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/SpringSecure
+    url: ${DB_URL}
     username: postgres
     password: postgres
-
   liquibase:
     change-log: classpath:db/changelog/db-changelog.xml
-
-  docker:
-    compose:
-      enabled: true
-      file:
-
-
 jpa:
   hibernate:
     ddl-auto: none
-
   open-in-view: false
-

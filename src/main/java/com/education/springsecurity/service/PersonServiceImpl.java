@@ -7,6 +7,7 @@ import com.education.springsecurity.mapper.PersonMapper;
 import com.education.springsecurity.model.Person;
 import com.education.springsecurity.repository.PersonRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 
 
+@Log4j
 @AllArgsConstructor
 @Service
 public class PersonServiceImpl implements PersonService, UserDetailsService {
@@ -32,6 +34,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     public void create(PersonDto personDto) {
 
         if(personRepository.findByEmail(personDto.getEmail()).isEmpty()){
+            log.error("Trying to save a user that already exists.");
             throw new UserAlreadyRegistered("This user already exists.");
         }else {
             Person person = personMapper.toPerson(personDto);
@@ -48,8 +51,7 @@ public class PersonServiceImpl implements PersonService, UserDetailsService {
     @Override
     public PersonDto findPerson(long id) {
 
-        return null;
-        //return personMapper.toPersonDto(personRepository.findById(id).orElseThrow(()-> new UserNoFoundException("User bot found.")));
+        return personMapper.toPersonDto(personRepository.findById(id).orElseThrow(()-> new UserNoFoundException("User bot found.")));
     }
 
     @Override
